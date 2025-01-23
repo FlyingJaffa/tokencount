@@ -2,6 +2,7 @@
 import tiktoken
 # This allows interaction with the OS and file structures
 from pathlib import Path
+from PyPDF2 import PdfReader
 
 model = "gpt-4"
 
@@ -33,10 +34,18 @@ def count_tokens(text: str) -> int:
 # This is the process that takes a file, reads the text
 # and returns it as a variable "text"
 def process_file(file_path: str) -> dict:
- 
     path = Path(file_path)
     if not path.exists():
         raise FileNotFoundError(f"Could not find file: {file_path}")
     
-    text = path.read_text(encoding='utf-8')
+    # Handle PDF files
+    if path.suffix.lower() == '.pdf':
+        reader = PdfReader(str(path))
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() + "\n"
+    else:
+        # Handle text files
+        text = path.read_text(encoding='utf-8')
+    
     return process_text(text)
