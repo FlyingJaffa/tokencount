@@ -6,7 +6,7 @@ data_dir = Path("data")
 
 # Check if directory exists
 if not data_dir.exists():
-    print(f"Error: Directory '{data_dir}' does not exist!")
+    print(f"Error: Directory '{data_dir}' does not exist")
     exit(1)
 
 # Process all files in the data directory

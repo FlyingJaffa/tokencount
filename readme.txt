@@ -1,3 +1,3 @@
-So main.py is where you can run the script to analyse the text 
-in the data folder. It uses the functions in counter.py to 
-give the character and token count.
+Place a text, PDF or JSON in the data folder, run Main.py and it 
+uses tiktoken to estimate the token count should it be passed
+to an LLM.
